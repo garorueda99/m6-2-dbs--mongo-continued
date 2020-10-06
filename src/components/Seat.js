@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Tippy from '@tippy.js/react';
+import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import 'tippy.js/themes/material.css';
-import 'tippy.js/animations/scale-subtle.css';
 import VisuallyHidden from '@reach/visually-hidden';
 import seatImageSrc from '../assets/seat-available.svg';
 import { getRowName, getSeatNum, encodeSeatId } from '../helpers';
@@ -20,22 +18,23 @@ const Seat = ({ rowIndex, seatIndex, width, height, price, status }) => {
   const seatNum = getSeatNum(seatIndex);
 
   const seatId = encodeSeatId(rowIndex, seatIndex);
-
+  const buttonRef = useRef(null);
   return (
     <TippyF
-      content={`Row ${rowName}, Seat ${seatNum} – $${price}`}
-      placement="top"
-      animation="scale-subtle"
-      theme="material"
       arrow={true}
-      duration={200}
-      delay={[400, 0]}
-      distance={8}
+      interactive={true}
+      interactiveBorder={20}
+      delay={100}
+      content={`Row ${rowName}, Seat ${seatNum} – $${price}`}
     >
       <Wrapper
+        ref={buttonRef}
         disabled={status === 'unavailable'}
-        onClick={() => {
+        onClick={(e) => {
+          e.preventDefault();
           beginBookingProcess({ seatId, price });
+          console.log(e.target);
+          buttonRef.current.blur();
         }}
       >
         <VisuallyHidden>
