@@ -1,13 +1,21 @@
 'use strict';
 
 const getSeats = async (req, res) => {
-  const { DBNAME } = require('../configDB');
+  const { DBNAME } = require('./configDB');
   const { MongoClient } = require('mongodb');
   require('dotenv').config();
   const { MONGO_URI } = process.env;
   const options = { useNewUrlParser: true, useUnifiedTopology: true };
   const { start = 0, limit = 96 } = req.query;
   const [startInt, limitInt] = Object.values({ start, limit }).map(Number);
+
+  let state;
+
+  // if (!state) {
+  //   state = {
+  //     bookedSeats: randomlyBookSeats(30),
+  //   };
+  // }
 
   try {
     const client = await MongoClient(MONGO_URI, options);
@@ -18,21 +26,11 @@ const getSeats = async (req, res) => {
       .find()
       .toArray((err, result) => {
         if (result.length) {
-          const init =
-            startInt < 0
-              ? 0
-              : startInt > result.length
-              ? result.length
-              : startInt;
-          const end =
-            startInt + limitInt > result.length
-              ? result.length
-              : startInt + limitInt;
           res.status(200).json({
-            status: 200,
-            start: init,
-            limit: end - init,
-            data: result.slice(init, end),
+            seats: result,
+            bookedSeats: [],
+            numOfRows: 8,
+            seatsPerRow: 12,
           });
           client.close();
         } else {

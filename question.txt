@@ -1,0 +1,8 @@
+
+  React.useEffect(() => {
+    fetch('/api/seat-availability')
+      .then((res) => res.json())
+      .then(receiveSeatInfoFromServer);
+  }, [receiveSeatInfoFromServer]);
+
+  How receiveSeatInfoFromServer is evaluated? 

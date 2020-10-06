@@ -15,6 +15,7 @@ function App() {
   const {
     actions: { receiveSeatInfoFromServer },
   } = React.useContext(SeatContext);
+
   const {
     actions: { clearSnackbar },
     status,
@@ -22,7 +23,7 @@ function App() {
 
   React.useEffect(() => {
     fetch('/api/seat-availability')
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(receiveSeatInfoFromServer);
   }, [receiveSeatInfoFromServer]);
 

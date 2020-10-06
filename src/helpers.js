@@ -1,13 +1,13 @@
-export const getRowName = rowIndex => {
+export const getRowName = (rowIndex) => {
   return String.fromCharCode(65 + rowIndex);
 };
 
-export const getRowIndex = rowName => {
+export const getRowIndex = (rowName) => {
   return rowName.charCodeAt(0) - 65;
 };
 
-export const getSeatNum = seatIndex => seatIndex + 1;
-export const getSeatIndex = seatNum => seatNum - 1;
+export const getSeatNum = (seatIndex) => seatIndex + 1;
+export const getSeatIndex = (seatNum) => seatNum - 1;
 
 export const encodeSeatId = (rowIndex, seatIndex) => {
   const rowName = getRowName(rowIndex);
@@ -16,7 +16,7 @@ export const encodeSeatId = (rowIndex, seatIndex) => {
   return `${rowName}-${seatNum}`;
 };
 
-export const decodeSeatId = seatId => {
+export const decodeSeatId = (seatId) => {
   if (!seatId) {
     return {};
   }
@@ -30,3 +30,5 @@ export const decodeSeatId = seatId => {
     seatIndex: seatNum - 1,
   };
 };
+
+//Fecth Helpers
