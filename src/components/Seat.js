@@ -20,13 +20,7 @@ const Seat = ({ rowIndex, seatIndex, width, height, price, status }) => {
   const seatId = encodeSeatId(rowIndex, seatIndex);
   const buttonRef = useRef(null);
   return (
-    <TippyF
-      arrow={true}
-      interactive={true}
-      interactiveBorder={20}
-      delay={100}
-      content={`Row ${rowName}, Seat ${seatNum} – $${price}`}
-    >
+    <TippyF delay={100} content={`Row ${rowName}, Seat ${seatNum} – $${price}`}>
       <Wrapper
         ref={buttonRef}
         disabled={status === 'unavailable'}
