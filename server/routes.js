@@ -51,6 +51,6 @@ router.post('/api/book-seat', bookSeat);
 
 router.delete('/api/clear-seat/:_id', clearSeat);
 
-router.patch('/api/modify-book-seat/', modifySeatInfo);
+router.patch('/api/modify-book-seat', modifySeatInfo);
 
 module.exports = router;
