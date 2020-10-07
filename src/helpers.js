@@ -31,4 +31,3 @@ export const decodeSeatId = (seatId) => {
   };
 };
 
-//Fecth Helpers
